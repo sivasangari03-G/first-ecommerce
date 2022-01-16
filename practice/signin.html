@@ -5,12 +5,47 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>SIGN IN</title>
+		<style>
+			#container {
+				width: 40%;
+				margin: 3% auto;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				align-content: center;
+				box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+				box-sizing: border-box;
+			}
+			input {
+				width: 70%;
+				height: 40px;
+				margin-top: 30px;
+				padding-left: 2%;
+			}
+			button {
+				width: 70%;
+				height: 40px;
+				margin-top: 100px;
+				margin-bottom: 40px;
+				cursor: pointer;
+			}
+			img {
+				height: 150px;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="container">
-			<input type="text" id="username" />
-			<input type="password" id="password" />
-			<button onclick="SignInFunc()">CLICK ME</button>
+			<img
+				src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAhFBMVEX///8REREAAAAODg4ICAgGBgb6+vpqamr8/Pz39/fg4OAvLy/X19fw8PDd3d2Li4uxsbHp6em7u7snJydzc3PCwsKenp6BgYHGxsY/Pz+Tk5NfX18sLCxRUVF8fHzS0tI2Njanp6dMTEw9PT2Hh4cdHR2ZmZlaWlpOTk6srKxkZGQXFxcdh3xcAAAEPElEQVR4nO3a2ZaqMBAF0KbEARQFRHBGnLja//9/l4DYDkxCArjW2U/9YqCoSkKK/vkBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgPZQm76BJAOF31i6wW8sPgaqZ4/4DWee+Y3Fg6Fb+yXPhz6SOZZDVdrcWdDe7PEc0yCb53BVuOcFEW05rwralPgOWE5P9VZBdLTzeBfU4B8tOQ/5OVW3hiw8us75D94nanYh1WbbQxCb3CU6iti0JkR9AcMWNHCXuyC6bqdDNNQHIi5xIYlmIgbOp4ztVRidJMnBYxZQnoxLHXnaxFah6n028YLoJKlLJ66b3yONZKn+ItXMLYtOZtFJrDz5bn5PDiTVXKTKfLlm0YXJi8qT47vZG4vYM6xtJVVGZ/+eOyZI31no1T1iT3Eo8hJ/xpfrNJ54cXluBJYn44aXq2MaaqZ1ekoeW13IGgu+7EAKryj6nVSbT4Yv0bHy3NniV/A+RRczxV1Cc5f+W3SsPFczIZv7M51uj1PQTvsz8vzT08S7r55OLQ0Fo3t7suSKGF236D150ebn1ZA+xqd4SvDejozZcZeQuyg+EUeHZHGNcq5SzZ1sknIXlac0qa/fpfw9Yn6vNCN7IyUnL0zfWhe7+T3b3lPIZ7cYGJc+pUUXvZuJmO7pxg+3QquqoxnmNmXi3a5Aa2FHhzTXvxRKnVOV4lHmxz0746VFx8qTc9+sCJce76H8UuPa+4zSvJWnJfLokMZ/jrBMmfZUL2vixeU5PGvc776AMb3cyKeLgGpamRMvLk9/Vnt5RvqvER4++LEycw5pO95zeW5FHx1SaW8Pn6xivxy458OtdZSXvqHdUPoYm95uqUBLWBnb18xF8zG+VW3vZokW7xFK5GT+5LExlkMW1Nb9wOs6cwtxkbaoK7PtusDEi9O39hosz8gyMUKJtWRf762nmZPdQ2MsP33Xet/Nkm2SIwx3L8sbqYYWMMYj/djfFZt4kS5Nl634VK5kzCaZ7eG/00D4V7HKDAXluaj16JBhnpbC+F47six3ipXlw5MR2tb9TMJeUVFQ3bUfHbJYnCNkbd0W/RNA4FB46ShArqGt+7HcV67i2LtZu9IX4lWk4dGh6WAS8YmQvZu1rjxvOEQYpG/K/T9C+Kk8D1l5Nnt0yLGotpZ26bfGtm4pToUyDdK3u7S3PG/00hG25eiQRysZYRNt3ZJWZUIk2uutL89Y3uHiXVNt3dL8z0IMyrOZtm55aqGOUoRtfmZN32w5uhRNYqNt3UoK7Ylh3+xrVpdXTl6hBuH9Wt+w+aWyM3toRLQyv2x1eeMOKbFUO6zL5uvfHl7IXLz06cPgaLpt6pOYAO4k/IR7t/adWcvPDZ8zRpflxHGOk7PuGl+7cAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAd/gOVsC9keTWc5QAAAABJRU5ErkJggg=="
+				alt=""
+			/>
+			<h3>YOUR ACCOUNT FOR EVERYTHING NIKE</h3>
+			<input type="text" id="username" placeholder="Enter Username" />
+			<input type="password" id="password" placeholder="Enter Password" />
+			<label style="display: none">Enter strong password </label>
+			<button onclick="SignInFunc()">SIGN IN</button>
 		</div>
 	</body>
 </html>
@@ -19,15 +54,27 @@
 	var username = document.querySelector("#username");
 	var password = document.querySelector("#password");
 	var signIn = JSON.parse(localStorage.getItem("signIn"));
+	var lbl = document.querySelector("label");
+	var regx = /([!@#$%^&*])/;
+	
 	console.log(signIn);
+	
 	function SignInFunc() {
 		if (signIn == null) {
 			signIn = [];
 		}
-		signIn.push({ username: username.value, password: password.value });
+
+		if (regx.test(password.value)) {
+			signIn.push({ username: username.value, password: password.value });
+			window.open("http://127.0.0.1:5500/practice/login.html");
+		} else {
+			lbl.style.display = "block";
+			lbl.style.color = "red";
+			alert("enter strong password");
+		}
 
 		localStorage.setItem("signIn", JSON.stringify(signIn));
+
+		//window.open("http://127.0.0.1:5500/practice/login.html")
 	}
 </script>
-
-
