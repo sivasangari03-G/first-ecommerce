@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>SIGN IN</title>
+	</head>
+	<body>
+		<div id="container">
+			<input type="text" id="username" />
+			<input type="password" id="password" />
+			<button onclick="SignInFunc()">CLICK ME</button>
+		</div>
+	</body>
+</html>
+
+<script>
+	var username = document.querySelector("#username");
+	var password = document.querySelector("#password");
+	var signIn = JSON.parse(localStorage.getItem("signIn"));
+	console.log(signIn);
+	function SignInFunc() {
+		if (signIn == null) {
+			signIn = [];
+		}
+		signIn.push({ username: username.value, password: password.value });
+
+		localStorage.setItem("signIn", JSON.stringify(signIn));
+	}
+</script>
+
+

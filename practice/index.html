@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>main</title>
+		<style>
+			img {
+				padding-top: 20px;
+				width: 80%;
+				height: 300px;
+			}
+			#container {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+			}
+
+			#container > div {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 40px;
+				align-items: center;
+			}
+			#container > div:hover {
+				box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+			}
+
+			button {
+				margin-bottom: 20px;
+				padding: 10px 20px;
+				cursor: pointer;
+				background-color: white;
+			}
+            #gotocart {
+                float: right;
+            }
+		</style>
+	</head>
+	<body>
+        <a href="cart.html" target="_blank"><button id="gotocart">GO TO CART</button></a>
+        <button onclick="sortLToH(product)" id="sortBtn">SORT LOW TO HIGH</button>
+        <div style="clear:both"></div>
+		<div id="container"></div>
+	</body>
+</html>
+
+<script>
+	var product = [
+		{
+			name: "nike shoe 1",
+			price: 2000,
+			image: "https://images.pexels.com/photos/2529157/pexels-photo-2529157.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 2",
+			price: 1000,
+			image: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 3",
+			price: 20320,
+			image: "https://images.pexels.com/photos/48262/pexels-photo-48262.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 4",
+			price: 3100,
+			image: "https://images.pexels.com/photos/1307128/pexels-photo-1307128.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 5",
+			price: 1560,
+			image: "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 6",
+			price: 3241,
+			image: "https://images.pexels.com/photos/60735/pexels-photo-60735.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 7",
+			price: 3233,
+			image: "https://images.pexels.com/photos/9565802/pexels-photo-9565802.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 8",
+			price: 200,
+			image: "https://images.pexels.com/photos/8381342/pexels-photo-8381342.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 9",
+			price: 5111,
+			image: "https://images.pexels.com/photos/4273288/pexels-photo-4273288.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+
+		{
+			name: "nike shoe 10",
+			price: 7129,
+			image: "https://images.pexels.com/photos/8811377/pexels-photo-8811377.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+		},
+	];
+	var container = document.querySelector("#container");
+
+	function appendProducts(product) {
+		product.forEach(function (elem) {
+			// console.log(elem);
+			// console.log(elem.name);
+
+			var div = document.createElement("div");
+
+			var name = document.createElement("h2");
+			name.innerHTML = elem.name;
+
+			var price = document.createElement("h3");
+			price.innerHTML = elem.price;
+
+			var image = document.createElement("img");
+			image.src = elem.image;
+			var button = document.createElement("button");
+			button.innerHTML = "ADD TO CART";
+
+			button.onclick = function () {
+				addToCartFunc(elem);
+			};
+			div.append(image, name, price, button);
+			container.append(div);
+
+            
+		});
+	}
+
+	appendProducts(product);
+
+	function addToCartFunc(elem) {
+		var cart = JSON.parse(localStorage.getItem("cart"));
+
+		if (cart === null) {
+			cart = [];
+			localStorage.setItem("cart", JSON.stringify(cart));
+		}
+
+		cart.push(elem);
+		localStorage.setItem("cart", JSON.stringify(cart));
+        //console.log(cart)
+	}
+
+    function sortLToH(product) {
+       // console.log(product);
+        product.sort(function(a, b) {
+            return a.price - b.price;
+        })
+
+        container.innerHTML = null;
+       appendProducts(product);
+    }
+    
+</script>

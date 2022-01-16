@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>cart</title>
+		<style>
+			img {
+				padding-top: 20px;
+				width: 80%;
+				height: 300px;
+			}
+			#container {
+				display: grid;
+				grid-template-columns: repeat(4, 25%);
+			}
+
+			#container > div {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 40px;
+				align-items: center;
+			}
+			#container > div:hover {
+				box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+			}
+			#checkOut {
+				float: right;
+				padding: 10px 50px;
+			}
+			.dl {
+				margin-bottom: 20px;
+			}
+            #total {
+                float: left;
+            }
+		</style>
+	</head>
+	<body>
+		<a href="payment.html" target="_blank"
+			><button id="checkOut">CHECK OUT</button></a
+		>
+		<h1 id="total"></h1>
+        <a href="index.html" target="_blank"><button style="float: right;padding: 10px 50px; margin-right: 1%;">Go To Main</button></a>
+        <div style="clear: both"></div>
+		<div id="container"></div>
+	</body>
+</html>
+
+<script>
+	var product = JSON.parse(localStorage.getItem("cart"));
+
+	var totalTag = document.querySelector("#total");
+
+	var total = 0;
+	function appendProducts(product) {
+		container.innerHTML = null;
+		product.forEach(function (elem, index) {
+			var div = document.createElement("div");
+
+			var name = document.createElement("h2");
+			name.innerHTML = elem.name;
+
+			var price = document.createElement("h3");
+			price.innerHTML = `₹ ${elem.price}`;
+
+			var image = document.createElement("img");
+			image.src = elem.image;
+			var dl = document.createElement("button");
+			dl.innerHTML = "Delete";
+			dl.class = "dl";
+			div.append(image, name, price, dl);
+			container.append(div);
+
+			total += elem.price;
+
+			dl.onclick = function () {
+				deleteFromCart(elem, index);
+			};
+		});
+	}
+	appendProducts(product);
+	totalTag.innerHTML = `Total Amount: ₹ ${total}`;
+
+	function deleteFromCart(elem, index) {
+		//    console.log(elem,index);
+		//    console.log(product)
+		var p = elem.price;
+		total -= p;
+		totalTag.innerHTML = total;
+
+		var getelem = document.querySelector("h2");
+
+		// container.innerHTML = null;
+		product.splice(index, 1);
+		total = 0;
+		//console.log(product)
+		appendProducts(product);
+		// var product = JSON.parse(localStorage.getItem("cart"));
+		localStorage.setItem("cart", JSON.stringify(product)); // when we click delete button it will remove it from local storage
+		total2 -= total;
+		localStorage.setItem("total", JSON.stringify(total));
+	}
+
+	//console.log(total);
+
+
+
+    //this is to store amount in local storage so that we can access this in payment.html
+	var total2 = JSON.parse(localStorage.getItem("total"));
+
+	if (total2 === 0) {
+		total2 = 0;
+		localStorage.setItem("total", JSON.stringify(total));
+	}
+
+	total2 += total;
+	localStorage.setItem("total", JSON.stringify(total));
+	//console.log(total2);
+</script>
