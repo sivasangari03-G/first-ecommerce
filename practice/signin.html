@@ -66,7 +66,8 @@
 
 		if (regx.test(password.value)) {
 			signIn.push({ username: username.value, password: password.value });
-			window.open("http://127.0.0.1:5500/practice/login.html");
+			// <a href="login.html"></a>
+			window.open("login.html");
 		} else {
 			lbl.style.display = "block";
 			lbl.style.color = "red";

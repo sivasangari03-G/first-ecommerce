@@ -157,10 +157,11 @@
 			alert("enter valid data");
 		} else {
             setTimeout(function () {
+				alert("Payment Sucessful")
                 Swal.fire("Good job!", "Payment SucessFul", "success");
-			}, 5000);
+			},);
             setTimeout(function () {
-                window.open("http://127.0.0.1:5500/practice/index.html");
+                window.open("index.html");
 
             },7000)
 		}
