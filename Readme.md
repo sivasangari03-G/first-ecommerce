@@ -10,6 +10,7 @@ Just have to clone the repository or download the zip version and then open inde
 
 - [Sivasangari](https://github.com/sivasangari03-G)
 
+Now visit the deployed site : "https://mini-nike-store.herokuapp.com/"
  
 ## Features
 
